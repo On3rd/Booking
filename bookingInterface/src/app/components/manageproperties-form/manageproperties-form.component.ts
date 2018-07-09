@@ -11,8 +11,6 @@ import {User} from '../../classes/user';
 import { UserService } from '../../services/user.service';
 import { ValueTransformer } from '@angular/compiler/src/util';
 import { PropertyTimeSheetService } from '../../services/property-time-sheet.service';
-import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manageproperties-form',
@@ -26,40 +24,17 @@ export class ManagepropertiesFormComponent implements OnInit {
   private admin:any;
   private properties:Property[];
   private bookings:AccBooking[];
-  private editProperty:FormGroup;
+  
   private user:User[];
 
   private ownedProperties:string = "Property";
   private userID:number;
   private propID:number;
 
-  constructor(public toastr:ToastrService,private _formBuilder:FormBuilder,private _PropertyTimeSheet:PropertyTimeSheetService,private _userService:UserService,private _propertyMapService:PropertyMapService,private _accBookingService:AccBookingService,private _propertyService: PropertyService, private _router: Router,private _login:LoginService) { }
+  constructor(private _PropertyTimeSheet:PropertyTimeSheetService,private _userService:UserService,private _propertyMapService:PropertyMapService,private _accBookingService:AccBookingService,private _propertyService: PropertyService, private _router: Router,private _login:LoginService) { }
 
 
   ngOnInit() {
-    this.propID = this._PropertyTimeSheet.getPropertyId(); 
-
-    console.log("PROPERTY NUMBER",this.propID);
-    this.editProperty = this._formBuilder.group({
-      "txt_PropertyName":new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "propertyType":new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "txt_noOfRooms" : new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "txt_City" :new FormControl('',[Validators.maxLength(150),Validators.required])
-      ,"txt_contact" :new FormControl('',[Validators.required]),
-      "txt_AddressLine2":new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "txt_Country":new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "uploadImage" : new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "txt_Province" :new FormControl('',[Validators.maxLength(150),Validators.required])
-      ,"txt_streetAddress" :new FormControl('',[Validators.required])
-      ,"txt_website" :new FormControl(''),
-      "txt_price":new FormControl('',[Validators.maxLength(150),Validators.required]),
-      "txt_PostalCode":new FormControl('',[Validators.maxLength(150),Validators.required])
-    
-    
-    
-    
-    });
-
     this.property = this._propertyService.getter();
     this.username = this._login.getLoggedInUser();
     this.admin = this._login.getAdmin();
@@ -89,41 +64,6 @@ export class ManagepropertiesFormComponent implements OnInit {
     })
      
   }
-
-
-  calculateReservations()
-  {
-    var propId = this._PropertyTimeSheet.getPropertyId();
-    var count = 0;
-    
-    if(this.bookings != undefined){
-    this.bookings.forEach(function(value)
-    {
-      if(propId == value.prop_Id)
-      { 
-          count++;
-      }
-    });
-  }
-
-    return count;
-  }
-
-  deleteProperty()
-  {
-    this._propertyService.deleteProperty(this.propID).subscribe((data)=>{
-      this.properties.splice(this.properties.indexOf(this.property),1);
-     //alert("Property successfully removed");
-     this._router.navigate(['home']);
-     this.toastr.success("Property successfully removed","Success");
-     
-    });
-    
-    
-
-  }
-
-  
   manageProperty(accBookingName:string,user_id:number)
   {
     var checked = false;
@@ -151,7 +91,7 @@ export class ManagepropertiesFormComponent implements OnInit {
       {
         vpropID = value.prop_Id;
       }
-    });
+    })
 
    
     this.ownedProperties = place;
@@ -174,11 +114,7 @@ export class ManagepropertiesFormComponent implements OnInit {
   {
     this._router.navigate(['manageBooking']);
   }
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
-
-  }
+  
   home()
   {
     this._router.navigate(['home']);
@@ -197,8 +133,6 @@ export class ManagepropertiesFormComponent implements OnInit {
     price: string,
     postal_code: string) {
 
-      this.property.prop_Id = this._PropertyTimeSheet.getPropertyId();
-      this.property.user_Id = this.userID;
     if (prop_name == null || prop_type == null || numberRoom == null || city == null ||
        contact_name == null || addressline2 == null || country == null ||
        image == null||province==null||streetAddress==null||
@@ -208,23 +142,10 @@ export class ManagepropertiesFormComponent implements OnInit {
       // alert("Make sure you entered all the needed fields");
     } else {
       
-     if (this.property.prop_Id == undefined){
-       
-      //alert("Update failed");
-      this.toastr.error("Update failed","Error");
-    
-      }
-      else
-      {
+     if (this.property.prop_name == prop_name){
         this._propertyService.updateProperty(this.property).subscribe((property) => {
           console.log(property);
-          this._PropertyTimeSheet.setPropertyId(this.property.prop_Id,this.property.prop_name);
-   
-         // alert("Update Successful");
-         
-          location.reload();
-          this.toastr.success("Update Successful","Success");
-    
+          this._router.navigate(['/home']);
         },
           (error) => {
             console.log(error);

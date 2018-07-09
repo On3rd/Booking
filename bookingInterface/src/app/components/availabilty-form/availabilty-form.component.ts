@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {PropertyTimeSheetService} from '../../services/property-time-sheet.service';
 import { PropertyTimeSheet } from '../../classes/property-time-sheet';
 import { LoginService } from '../../services/login.service';
-import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-availabilty-form',
@@ -17,8 +15,8 @@ export class AvailabiltyFormComponent implements OnInit {
   private localProperty; 
   private timeSheet:PropertyTimeSheet[];
   private count = 0;
- private dateForm:FormGroup;
-  constructor(public toastr: ToastrService,private _formBuilder:FormBuilder,private _propertyTimeSheetService:PropertyTimeSheetService,private _login:LoginService) { }
+
+  constructor(private _propertyTimeSheetService:PropertyTimeSheetService,private _login:LoginService) { }
 
   ngOnInit() {
     this.propertyTimeSheet = this._propertyTimeSheetService.getter();
@@ -26,12 +24,7 @@ export class AvailabiltyFormComponent implements OnInit {
     this.userID = this._login.getLoggedInUserID();
     this._propertyTimeSheetService.getPropertyTimeSheets().subscribe((timeSheets)=>{console.log(timeSheets);
       this.timeSheet = timeSheets;
-    });
-
-    this.dateForm = this._formBuilder.group({
-      "month":new FormControl('',[Validators.required]),
-       });
-
+    })
   }
 
   addMonth(date:Date)
@@ -70,10 +63,8 @@ export class AvailabiltyFormComponent implements OnInit {
         
      }
       localStorage.setItem("count",JSON.stringify({AvailableDays:this.count}));
-       //alert("Date Added Successfully");
-        location.reload();
-        this.toastr.success("Date Added Successfully","Success");
-      
+       alert("Date Added Successfully");
+       location.reload();
    
   }
 

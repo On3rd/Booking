@@ -28,14 +28,5 @@ export class PropertyFormComponent implements OnInit {
   {
     this._login.logOut();
   }
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
-
-  }
-  home()
-  {
-    this._login.logOut();
-  }
 
 }

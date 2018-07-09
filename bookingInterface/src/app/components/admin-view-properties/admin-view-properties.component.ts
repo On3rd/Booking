@@ -4,8 +4,6 @@ import { Property } from '../../classes/property';
 import { UserService } from '../../services/user.service';
 import { User } from '../../classes/user';
 import { LoginService } from '../../services/login.service';
-import { SearchUserService } from '../../services/search-user.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-view-properties',
@@ -17,7 +15,7 @@ export class AdminViewPropertiesComponent implements OnInit {
   private property:Property[];
   private user:User[];
   private userID;
-  constructor(private _router:Router,private _PropertyService:PropertyService,private _userService:UserService,private _login:LoginService,private _searchUserService:SearchUserService) { }
+  constructor(private _PropertyService:PropertyService,private _userService:UserService,private _login:LoginService) { }
 
   ngOnInit() {
     this._PropertyService.getProperties().subscribe((property)=>{console.log(property);
@@ -34,14 +32,5 @@ export class AdminViewPropertiesComponent implements OnInit {
     })
     this.userID = this._login.getLoggedInUserID();
   }
- viewProperty(id:number)
- {
-  this._searchUserService.setSearchId(id);
-  this._router.navigate(['viewProperty']);
- }
- viewManager(id:number)
- {
-  this._searchUserService.setSearchId(id);
-  this._router.navigate(['searchUser']);
- }
+
 }

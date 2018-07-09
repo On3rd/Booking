@@ -7,8 +7,7 @@ import {JwtuserDetails} from '../../classes/jwtuser-details';
 import {LoginService} from '../../services/login.service';
 import {LocalStorageService,SessionStorageService} from 'ngx-webstorage';
 import { forEach } from '@angular/router/src/utils/collection';
-import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-signupform',
@@ -16,30 +15,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./signupform.component.css']
 })
 export class SignupformComponent implements OnInit {
- 
+ signUpform;
   private user:User;
   private users:User[];
   formType:string; 
   private reg:Boolean;
-  signUpForm:FormGroup;
-  private _navigate = new Navigate();
-  private emailPattern =
-  '^[a-zA-Z0-9._%+-]+@[a-z0-9.-]+[.][a-z]{2,4}$';
-private passwordPattern =
-  '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&_])[A-Za-z\d$@$!%*?&].{7,}';
-  private validator;
-  constructor(public toastr:ToastrService,public _formBuilder:FormBuilder,private _userService:UserService, private _router:Router,private _login:LoginService,private _localStorage:LocalStorageService) {
-  }
 
+  private _navigate = new Navigate()
+  constructor(private _userService:UserService, private _router:Router,private _login:LoginService,private _localStorage:LocalStorageService) {
 
-   
-   setValidate()
-   {
-    this.validator = "validate";
-   }
-   getValidate()
-   {
-     return this.validator;
    }
 
   ngOnInit() {
@@ -48,20 +32,10 @@ private passwordPattern =
       this.users = user;
     })
     
-    this.signUpForm = this._formBuilder.group({
-      "name":new FormControl('',[Validators.maxLength(100),Validators.required]),
-      "surname":new FormControl('',[Validators.maxLength(100),Validators.required]),
-      "email" : new FormControl('',[Validators.maxLength(100),Validators.required,Validators.pattern(this.emailPattern)]),
-      "phonenumber" :new FormControl('',[Validators.maxLength(10),Validators.required])
-      ,"pword" :new FormControl('',[Validators.required,Validators.pattern(this.passwordPattern)])
-    })
-
   }
 
   processForm(name:string,surname:string,email:string,phonenumber:string,pword:string)
   {
-   
-   
     var counters=0;
     var counter=0;
     var id = 0;
@@ -79,10 +53,9 @@ private passwordPattern =
       });
     }
 
-    if(name== null ||surname== null||email== null||phonenumber== null||pword == null )
+    if(name== null||surname== null||email== null||phonenumber== null||pword == null )
     {
-     //alert("Enter values");
-      this.toastr.info("Enter values","Invalid Inputs");
+      alert("Enter values");
     }else{
     if(counters>=1)
   { 
@@ -90,9 +63,7 @@ private passwordPattern =
     // console.log("Enter Values");
      //this.formType = "modal"; 
     // console.log(rag);
-     //alert("This Email Already Exists, Please Enter A New Email");
-     this.toastr.info("This Email Already Exists, Please Enter A New Email","Invalid Inputs");
-    
+     alert("This Email Already Exists, Please Enter A New Email");
    } else{
     
     if(this.user.user_Id == undefined )
@@ -104,9 +75,8 @@ private passwordPattern =
         counter++;
         console.log(counter);
         
-        //alert("Registration Successfull");
-        this.toastr.success("Registration Successfull","Success");
-    
+        alert("Registration Successfull");
+        
         if(counter>=1)
     {
        this._login.setLogin(id,name,surname,email,phonenumber);

@@ -9,7 +9,6 @@ import { Property } from '../../classes/property';
 import { PropertyService } from '../../services/property.service';
 import { PropertyTimeSheetService } from '../../services/property-time-sheet.service';
 import {PropertyTimeSheet} from '../../classes/property-time-sheet';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-bookings',
@@ -26,8 +25,8 @@ export class ManageBookingsComponent implements OnInit {
   private admin:any;
   private timeSheet:PropertyTimeSheet[];
   private timeSlots:PropertyTimeSheet;
-  
-  constructor(public toastr:ToastrService,private _propertyMapService:PropertyMapService ,private _router:Router ,private _login:LoginService,private _accBookingService:AccBookingService,private _propertyService:PropertyService,private _propertyTimeSheetService :PropertyTimeSheetService) { }
+
+  constructor(private _propertyMapService:PropertyMapService ,private _router:Router ,private _login:LoginService,private _accBookingService:AccBookingService,private _propertyService:PropertyService,private _propertyTimeSheetService :PropertyTimeSheetService) { }
 
   ngOnInit() {
     this._accBookingService.getAccBookings().subscribe((accBooking)=>{console.log(accBooking);
@@ -61,12 +60,10 @@ this.admin = this._login.getAdmin();
    this.resetDates(accBookingName,this.timeSheet);
    
   
-    //alert("The Booking Was Canceled");
+    alert("The Booking Was Canceled");
+      
     
-    location.reload();
-    this.toastr.success("The Booking Was Canceled.","Success");
-   
-
+      this._router.navigate(['home']);
   }
 
   resetDates(booking,propertyTimeSheet)
@@ -79,20 +76,7 @@ this.admin = this._login.getAdmin();
        
     
   }
-  getAccBookings()
-  {
-    var userId = this.userID;
-    var count = 0;
-    this.accBooking.forEach(function(value)
-  {
-    if(userId == value.user_id)
-    {
-      count++;
-    }
-    
-  });
-return count;
-  }
+
   viewPropertyByName(prop_name:string)
   {
     this._propertyMapService.setPropName(prop_name);
@@ -104,10 +88,7 @@ return count;
   {
     this._router.navigate(['/editProfile']);
   }
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
-  }
+  
   EditBooking(prop_name:string)
   {
     this._propertyMapService.setPropName(prop_name);

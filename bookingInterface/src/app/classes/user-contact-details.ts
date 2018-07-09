@@ -1,13 +1,13 @@
 export class UserContactDetails {
 
-    userContactInfo_Id:number
-	city:string
-	streetAddress:string
-	addressline2:string
-	province:string
-	country:string
-	postalCode:number
-	user_Id:number
+    private userContactInfo_Id:number
+	private email:string
+	private telNo:string
+	private streetAddress:string
+	private addressline2:string
+	private province:string
+	private country:string
+	private postalCode:number
+	private user_Id:number
 	
 }
-

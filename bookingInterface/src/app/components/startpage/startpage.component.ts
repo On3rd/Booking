@@ -1,4 +1,4 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../../services/login.service';
 import {Navigate} from '../../classes/navigate';
@@ -34,10 +34,7 @@ export class StartpageComponent implements OnInit {
   
   
     }
-   viewProfile()
-   {
-     this._router.navigate(['viewProfile']);
-   }
+   
     EditProfile()
     {
       this._router.navigate(['editProfile']);

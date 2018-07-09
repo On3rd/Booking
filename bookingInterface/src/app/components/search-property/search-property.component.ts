@@ -4,7 +4,6 @@ import {LoginService} from '../../services/login.service';
 import {PropertyService} from '../../services/property.service';
 import {PropertyMapService} from '../../services/property-map.service';
 import {Property} from '../../classes/property';
-import { SearchUserService } from '../../services/search-user.service';
 
 @Component({
   selector: 'app-search-property',
@@ -13,18 +12,16 @@ import { SearchUserService } from '../../services/search-user.service';
 })
 export class SearchPropertyComponent implements OnInit {
 
-  private title:string = null;
+  private title:string;
   private property:Property[];
   private username:string;
   private propertyName:string;
   private propID:number;
-  private rooms:number = 0;
- 
-  constructor(private _searchUserService:SearchUserService,private _router:Router,private _login:LoginService,private _PropertyService:PropertyService,private _propertyMapService:PropertyMapService ) 
+
+  constructor(private _router:Router,private _login:LoginService,private _PropertyService:PropertyService,private _propertyMapService:PropertyMapService ) 
   { 
     this.title = this._propertyMapService.getTitle();
-    this.rooms = this._propertyMapService.getRooms();
-      console.log("::"+this.title +"::"+this.rooms);
+    console.log("::"+this.title);
   }
 
   ngOnInit() {
@@ -36,12 +33,7 @@ export class SearchPropertyComponent implements OnInit {
     },(error)=>{
       console.log(error);
      
-    });
-    }
-   
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
+    })
   }
   ManageBooking()
   {
@@ -59,15 +51,10 @@ export class SearchPropertyComponent implements OnInit {
   {
     this._propertyMapService.setPropName(prop_name);
     this._propertyMapService.setPropID(propId);
-    this._searchUserService.setSearchId(propId);
     this.propID = this._propertyMapService.getPropID();
     this.propertyName = this._propertyMapService.getPropName();
     console.log("Property Name:",this.propertyName ," Property ID:", this.propID);
     this._router.navigate(['viewProperty']);
-  }
-  home()
-  {
-    this._router.navigate(['home']);
   }
 
 }

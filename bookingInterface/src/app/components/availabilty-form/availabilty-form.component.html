@@ -1,15 +1,15 @@
-<form class="padContent" [formGroup] = "dateForm">
+<form class="formDisplay padContent">
      <div class="padContent2">
     <div class="row padContent2"> 
-        <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0">
+        <div class="col-lg-5 col-lg-offset-0 col-md-5 col-md-offset-0">
         
         <div class ="row">
-                <div class="col-lg-12 col-md-12"><label>Enter Month</label>
-                <input class="form-control" type="month" name="month" [(ngModel)] ="month" [formControl]= "dateForm.controls.month" >
+                <div class="col-lg-12 col-md-12"><span>Enter Month</span>
+                <input class="form-control" type="month" name="month" [(ngModel)] ="month" data-ng-required="">
          </div>
          <div class="col-lg-12 col-md-12">
                 <br> 
-                            <button class="btn btn-default btn-block bookingButtons4" type="button" id="addMonth" [disabled] = "!dateForm.valid" (click) ="addMonth(month)">Add date</button>
+                            <button class="btn btn-default btn-block bookingButtons4" type="button" id="addMonth" (click) ="addMonth(month)">Add date</button>
                         <br>
                         <app-time-sheet></app-time-sheet>
                         </div>

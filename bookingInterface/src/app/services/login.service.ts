@@ -12,7 +12,7 @@ export class LoginService {
   private username_id:number = null;
   private admin:any;
   private admin_id:any;
-  private paymentMethod = null;
+ 
   constructor(private _login:Router) { }
 
   setLogin(user_id:number,uname:string,usurname:string,uemail:string,phoneNo:string)
@@ -21,29 +21,12 @@ export class LoginService {
  //   this.loggedInStatus = login;
    localStorage.setItem('currentUser',JSON.stringify({id:user_id,name:uname,surname:usurname,email:uemail,phonenumber:phoneNo,status:true}));
   }
-  setPaymentMethod(paymentMethod)
-  {
-    localStorage.setItem('paymentMethod',JSON.stringify({payMethod:paymentMethod}));
-  }
-  getPaymentMethod()
-  {
-    var paymeth = JSON.parse(localStorage.getItem('paymentMethod'));
-    if(paymeth != null)
-    {
-      return this.paymentMethod = paymeth.payMethod;
-    }
-    else
-    {
-      return this.paymentMethod;
-    }
-  }
   logOut()
   {
     this._navigate.setLoggedUserButton(false);
     localStorage.setItem('currentUser',JSON.stringify({status:false}));
     localStorage.setItem('Admin',JSON.stringify({status:false}));
    localStorage.removeItem('propertyID');
-   localStorage.removeItem('paymentMethod');
     this._login.navigate(['/']);
   }
   setAdmin(admin_id:number,uname:string,usurname:string,uemail:string,phoneNo:string,stuffNo:string)

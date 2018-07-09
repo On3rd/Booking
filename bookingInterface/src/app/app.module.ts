@@ -1,5 +1,5 @@
-import { NgModule, Component, ViewContainerRef } from '@angular/core';
-import { FormsModule,FormGroup,Validators,FormControl,FormControlName, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
@@ -55,22 +55,10 @@ import { AdminViewPropertiesComponent } from './components/admin-view-properties
 import { AdminViewUsersComponent } from './components/admin-view-users/admin-view-users.component';
 import { AdminViewReservationsComponent } from './components/admin-view-reservations/admin-view-reservations.component';
 import { ManagerModeComponent } from './components/manager-mode/manager-mode.component';
-import {UserContactDetailsService} from './services/user-contact-details.service';
 import {UserPaymentMethodService} from './services/user-payment-method.service';
-import { UserContactDetailsComponent } from './components/user-contact-details/user-contact-details.component';
-import { ViewUserProfileComponent } from './components/view-user-profile/view-user-profile.component';
-import {SearchUserService} from './services/search-user.service';
-import { SearchUserComponent } from './components/search-user/search-user.component';
-import {BrowserAnimationsModule}  from   '@angular/platform-browser/animations';
-import { ToasterService } from './services/toaster.service';
-import { injectViewContainerRef } from '@angular/core/src/render3';
-import {MatDialogModule,MatCard} from '@angular/material';
-import { PaymentComponent } from './components/payment/payment.component';
-import { PaymentFormComponent } from './components/payment-form/payment-form.component';
-import { ViewBankDetailsComponent } from './components/view-bank-details/view-bank-details.component';
-import { ViewAdditionalInformationComponent } from './components/view-additional-information/view-additional-information.component';
-import {ToastrModule} from 'ngx-toastr';
-    
+import {UserContactDetailsService} from './services/user-contact-details.service';
+import { UserContactDetailsFormComponent } from './components/user-contact-details-form/user-contact-details-form.component';
+
 const appRoutes:Routes = [
   {path:'',component:StartpageComponent},
   {path:'home',canActivate:[AuthguardGuard],component:HomepageComponent},
@@ -81,9 +69,7 @@ const appRoutes:Routes = [
   {path:'editDisplay',canActivate:[AuthguardGuard],component:EditDisplayComponent},
   {path:'manageProperty',canActivate:[AuthguardGuard],component:ManagepropertiesFormComponent},
   {path:'editProfile',canActivate:[AuthguardGuard],component:EditProfileComponent},
-  {path:'searchProperty',canActivate:[AuthguardGuard],component:SearchPropertyComponent},
-  {path: 'viewProfile',canActivate:[AuthguardGuard],component:ViewUserProfileComponent},
-  {path: 'searchUser',canActivate:[AuthguardGuard],component:SearchUserComponent}
+  {path:'searchProperty',canActivate:[AuthguardGuard],component:SearchPropertyComponent}
 ];
 
 @NgModule({
@@ -130,30 +116,16 @@ const appRoutes:Routes = [
     AdminViewUsersComponent,
     AdminViewReservationsComponent,
     ManagerModeComponent,
-    UserContactDetailsComponent,
-    ViewUserProfileComponent,
-    
-    SearchUserComponent,
-    
-    PaymentComponent,
-    
-    PaymentFormComponent,
-    
-    ViewBankDetailsComponent,
-    
-    ViewAdditionalInformationComponent,
+   
+    UserContactDetailsFormComponent,
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
-    HttpModule,MatDialogModule,ToastrModule.forRoot(),
-    FormsModule,Ng2Webstorage,ReactiveFormsModule,
+    HttpModule,
+    FormsModule,Ng2Webstorage,
     RouterModule.forRoot(appRoutes)
-    
   ],
-  
-  entryComponents:[PaymentComponent],
-  providers: [SearchUserService,UserContactDetailsService,UserPaymentMethodService,PropertyTimeSheetService,PropertyMapService,AccBookingService,LoginService,UserService,AuthguardGuard,PropertyService,DisplayPropertiesServiceService,CookieService ],
+  providers: [UserContactDetailsService,UserPaymentMethodService,PropertyTimeSheetService,PropertyMapService,AccBookingService,LoginService,UserService,AuthguardGuard,PropertyService,DisplayPropertiesServiceService,CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

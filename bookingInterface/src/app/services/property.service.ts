@@ -32,7 +32,7 @@ export class PropertyService {
 
    deleteProperty(id:number)
    {
-     return this._http.delete(this.baseUrl+'/property/'+id,this.options).map((response:Response)=>response.json())
+     return this._http.delete(this.baseUrl+'/Property/'+id,this.options).map((response:Response)=>response.json())
      .catch(this.errorHandler);
    }
    createProperty(property:Property)

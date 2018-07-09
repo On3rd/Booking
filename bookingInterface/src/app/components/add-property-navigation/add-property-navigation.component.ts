@@ -22,21 +22,5 @@ export class AddPropertyNavigationComponent implements OnInit {
   {
     this._router.navigate(['home']);
   }
-  EditProfile()
-  {
-    this._router.navigate(['editProfile']);
-  }
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
-  }
-  ManageBooking()
-  {
-    this._router.navigate(['manageBooking']);
-  }
-  logout()
-  {
-    this._login.logOut();
- 
-  }
+
 }

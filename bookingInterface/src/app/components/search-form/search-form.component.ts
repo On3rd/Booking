@@ -61,8 +61,8 @@ export class SearchFormComponent implements OnInit {
           }
           else
           {
-           // alert("No results.");
-            this.toastr.info("No results.","Search")
+            alert("No results.");
+          
           }
     });
    

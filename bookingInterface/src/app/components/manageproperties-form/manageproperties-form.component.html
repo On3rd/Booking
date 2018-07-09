@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default" id="indexNavBar">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand navbar-link bookingButtons" (click) ="home()" id="bookingBrand"> <img src="assets/img/Booking.com.png" alt="Booking.com" width="70%" id="brandImage"></a>
+            <a class="navbar-brand navbar-link bookingButtons" (click) ="home()" id="bookingBrand"> <img src="assets/img/Booking.com.png" alt="Booking.com" height="100%" id="brandImage"></a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1" id="toggleMenu"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
   
@@ -39,32 +39,22 @@
     <!--Logged In Button-->
         <span *ngIf="1==1">
           
-                <div class="form-group">
-         
-    
-                        <li class="dropdown">
-                       <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn"  type="button" id="dropdownMenuButton" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                                 alt=""> <span>{{username}}</span> </div></a>
-                       <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                        
-                        <div class="dropdown-content">
-                       <a class="dropdown-item" (click) = " ManageBooking()">Manage Bookings</a>
-                       <br>
-                      <a class="dropdown-item" (click) = "viewProfile()">View Profile</a>
-                      <br>
-                      <a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a>
-                      <br>
-                      
-                       <div class="dropdown-divider">
-                         
-                        </div>
-                        <hr>
-                       <a class="dropdown-item" (click) = "logout()">Sign Out</a>
-                       </div>
-                      </div>
-                    
-                       </li>
-                      </div>
+  <div class="form-group">
+                   
+    <li class="nav-item dropdown">
+   <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+             alt=""> <span>{{username}}</span> </div></a>
+   <div class="dropdown-menu " aria-labelledby="dropdownThemes">
+   <ul class ="padContent">
+   <li *ngIf ="admin == false"><a class="dropdown-item"  (Click) = "ManageBooking()">Manage Bookings</a></li>
+   <li><a class="dropdown-item" (click) ="EditProfile()">Edit Profile</a></li>
+  
+  
+   <div class="dropdown-divider"><hr></div>
+   <li><a class="dropdown-item" (click) = "logout()">Sign Out</a></li>
+   </ul></div>
+   </li>
+  </div>
         </span>
   
       </div>
@@ -99,13 +89,13 @@
 <div class="container " >
         <div class="row padContent2">
             <div class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
-                <h3>Manage <span *ngIf ="ownedProperties == null">Property</span><span>{{ownedProperties}}.</span> </h3>
+                <h3>Manage <span *ngIf ="ownedProperties == null">Property</span>{{ownedProperties}}. </h3>
                 <hr>
-                <label>Select Property:</label>
+                <p>Select Property:</p>
    
     <div class="dropdown">
 
-            <button  class=" btn bookingButtons4 btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span *ngIf ="ownedProperties == null">Property</span><span *ngIf ="ownedProperties != null">{{ownedProperties}}</span>
+            <button  class=" btn bookingButtons4 btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span *ngIf ="ownedProperties == null">Property</span>{{ownedProperties}}
             <span class="caret"></span></button>
             <ul class="dropdown-menu">
                     <div *ngFor ="let property of properties">
@@ -116,8 +106,8 @@
                       <hr>
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" *ngIf = "calculateReservations() > 0">
-                      <a class="nav-link active" id="viewBookings-tab" data-toggle="tab" href="#viewBookings" role="tab" aria-controls="viewBookings" aria-selected="true">Reservations ({{calculateReservations()}})</a>
+                    <li class="nav-item" >
+                      <a class="nav-link active" id="viewBookings-tab" data-toggle="tab" href="#viewBookings" role="tab" aria-controls="viewBookings" aria-selected="true">Reservations</a>
                     </li>
                     <li class="nav-item">
                       <a class="nav-link disabled" id="editProperty-tab" data-toggle="tab" href="#editProperty" role="tab" aria-controls="editProperty" aria-selected="false">Edit Property</a>
@@ -145,9 +135,9 @@
                         <div class="col-lg-5 col-lg-offset-0 col-md-5 col-md-offset-0 col-sm-5 col-sm-offset-0 col-xs-10 col-xs-offset-1">
                             <div *ngFor = "let users of user">
                                 <div *ngIf ="users.user_Id == accBookings.user_id">
-                                    <h4>Name: {{users.name | titlecase}}</h4>
-                                    <h4>Surname: {{users.surname | titlecase}}</h4>
-                                        <h4>Email: {{users.email }} </h4>
+                                    <h4>Name: {{users.name}}</h4>
+                                    <h4>Surname: {{users.surname}}</h4>
+                                        <h4>Email: {{users.email}} </h4>
                                    
                                             <h4>Phone Number: {{users.phoneNo}}</h4>
                                     
@@ -184,132 +174,96 @@
                     <div class="tab-pane fade" id="editProperty" role="tabpanel" aria-labelledby="editProperty-tab">
                          
                     <div class = "container" >
-                        <form class="" [formGroup] = "editProperty">
-                           
-                            <div class ="row padContent2">
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_PropertyName.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Property name</label>
-                                                  <input class="form-control" type="text" name="txt_PropertyName" [formControl]= "editProperty.controls.txt_PropertyName" [(ngModel)] = "property.prop_name" required="">
-                                              </div>
-                            
-                                          
-                            
-                                          </div>
-                            <br>
-                              <div class="row">
-                                    <span class = "validate" *ngIf ="!editProperty.controls.uploadImage.valid">
-                                            required.
-                                       </span>
-                                              <div class="col-lg-6 col-md-6"><label>Display Image</label>
-                            
-                                                  <input type="file" name="uploadImage" [formControl]= "editProperty.controls.uploadImage" [(ngModel)] = "property.image" >
+                            <form class="formDisplay padContent2">
+                                <h4>Basic Information</h4>
+                                <div class ="padContent2">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Property name</span>
+                                        <input class="form-control" type="text" name="txt_PropertyName" required="" autocomplete="on">
+                                    </div>
                                 
-                                              </div>
-                              
-                              
-                              </div>
-                            <br>
-                                          <div class="row">
-                                              <div class="col-lg-6 col-md-6">
-                                                    <span class = "validate" *ngIf ="!editProperty.controls.propertyType.valid">
-                                                            required.
-                                                       </span>
-                                                <label>Property type</label>
-                                                  <select class="form-control" name="propertyType" required="" [formControl]= "editProperty.controls.propertyType" [(ngModel)] = "property.prop_type">
-                                                      <optgroup label="PropertyType">
-                                                          <option value="Apartment">Apartment</option>
-                                                          <option value="Hotel">Hotel</option>
-                                                          <option value="Lodge">Lodge</option>
-                                                          <option value="Hotel Home">Holiday Home</option>
-                                                      </optgroup>
-                                                  </select>
-                                              </div>
-                                              <div class="col-lg-6 col-md-6">
-                                                    <span class = "validate" *ngIf ="!editProperty.controls.txt_noOfRooms.valid">
-                                                            required.
-                                                       </span>
-                                                  <label>The number of rooms</label>
-                                                  <input class="form-control" type="text" name="txt_noOfRooms" [formControl]= "editProperty.controls.txt_noOfRooms" [(ngModel)] = "property.numberRoom" required="">
-                                              </div>
-                                          </div>
-                            <div class="row">
-                                    <span class = "validate" *ngIf ="!editProperty.controls.txt_price.valid">
-                                            required.
-                                       </span>
-                                              <div class="col-lg-12 col-md-12"><label>Price </label>
-                                                  <input class="form-control" type="text" name="txt_price" [formControl]= "editProperty.controls.txt_price" [(ngModel)] = "property.price" required="">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_website.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Property website (optional)</label>
-                                                  <input class="form-control" type="text" name="txt_website" [formControl]= "editProperty.controls.txt_website" [(ngModel)] = "property.website">
-                                              </div>
-                                          </div>
-                                      <div class="row">
-                                            <span class = "validate" *ngIf ="!editProperty.controls.txt_contact.valid">
-                                                    required.
-                                               </span>
-                                              <div class="col-lg-12 col-md-12"><label>Contact name</label>
-                                                  <input class="form-control" type="text" name="txt_contact" [formControl]= "editProperty.controls.txt_contact" [(ngModel)] = "property.contact_name" required="" placeholder="Who will recieve this letter">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_streetAddress.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Street address</label>
-                                                  <input class="form-control" type="text" name="txt_streetAddress" [formControl]= "editProperty.controls.txt_streetAddress" [(ngModel)] = "property.streetAddress" required="" placeholder="e.g 123 Easy Street">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_AddressLine2.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Address line 2</label>
-                                                  <input class="form-control" type="text" name="txt_AddressLine2" [formControl]= "editProperty.controls.txt_AddressLine2" [(ngModel)] = "property.addressline2" required="" placeholder="Unit number, suite or building etc.">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_Province.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Province </label>
-                                                  <input class="form-control" type="text" name="txt_Province" [formControl]= "editProperty.controls.txt_Province" [(ngModel)] = "property.province" required="" placeholder="e.g Gauteng">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_Country.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Country </label>
-                                                  <input class="form-control" type="text" name="txt_Country" [formControl]= "editProperty.controls.txt_Country" [(ngModel)] = "property.country" required="" placeholder="e.g South Africa">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_City.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>City </label>
-                                                  <input class="form-control" type="text" name="txt_City"  [formControl]= "editProperty.controls.txt_City" [(ngModel)] = "property.city" required="" placeholder="e.g Pretoria">
-                                              </div>
-                                          </div>
-                                          <div class="row">
-                                                <span class = "validate" *ngIf ="!editProperty.controls.txt_PostalCode.valid">
-                                                        required.
-                                                   </span>
-                                              <div class="col-lg-12 col-md-12"><label>Postal Code</label>
-                                                  <input class="form-control" type="text" name="txt_PostalCode" [formControl]= "editProperty.controls.txt_PostalCode" [(ngModel)] = "property.postal_code" required="" placeholder="e.g 0198">
-                                              </div>
-                                          </div>
-                            <br>
-                            </div>
-                                      </form>
+                                
+                                
+                                </div><br>
+                                    <div class="row">
+                                    <div class="col-lg-3 col-md-3"><span>Display Image</span>
+                                
+                                        <input type="file" name="uploadImage" >
+                                        
+                                    </div>
+                                    
+                                    
+                                    </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-3"><span>Property type</span>
+                                        <select class="form-control" required="">
+                                            <optgroup label="PropertyType">
+                                                <option value="Apartment">Apartment</option>
+                                                <option value="Hotel">Hotel</option>
+                                                <option value="Lodge">Lodge</option>
+                                                <option value="Hotel Home">Hotel Home</option>
+                                            </optgroup>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3"><span>The number of rooms</span>
+                                        <input class="form-control" type="text" name="txt_noOfRooms" required="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Price </span>
+                                        <input class="form-control" type="text" name="txt_price" required="">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Property website (optional)</span>
+                                        <input class="form-control" type="text" name="txt_website">
+                                    </div>
+                                </div>
+                                <br>
+                                </div>
+                            
+                                <h4>Property Address</h4>
+                                <div class ="padContent2">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Contact name</span>
+                                        <input class="form-control" type="text" name="txt_contact" required="" placeholder="Who will recieve this letter">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Street address</span>
+                                        <input class="form-control" type="text" name="txt_streetAddress" required="" placeholder="e.g 123 Easy Street">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Address line 2</span>
+                                        <input class="form-control" type="text" name="txt_AddressLine2" required="" placeholder="Unit number, suite or building etc.">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Province </span>
+                                        <input class="form-control" type="text" name="txt_Province" required="" placeholder="e.g Gauteng">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Country </span>
+                                        <input class="form-control" type="text" name="txt_Country" required="" placeholder="e.g South Africa">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>City </span>
+                                        <input class="form-control" type="text" name="txt_City" required="" placeholder="e.g Pretoria">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6"><span>Postal Code</span>
+                                        <input class="form-control" type="text" name="txt_PostalCode" required="" placeholder="e.g 0198">
+                                    </div>
+                                </div>
+                                <br>
+                                </div>
+                            </form>
+                            
                                 
                             
                                 
@@ -320,22 +274,11 @@
                             <br>
                             <div class="row padContent">
                             
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
-                                    <button class="btn btn-default btn-block bookingButtons4" type="submit" [disabled] = "!editProperty.valid" (click) = "processForm(property.prop_name,
-                                property.prop_type,
-                                property.numberRoom,
-                                property.city,
-                                property.contact_name,
-                                property.addressline2,
-                                property.country,
-                                property.image,
-                                property.province,
-                                property.streetAddress,
-                                property.website,
-                                property.price,
-                                property.postal_code)">Edit Property</button> </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                                    <button class="btn btn-default btn-block bookingButtons4" type="submit" (click) = "deleteProperty()">Delete Property</button>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 ">
+                                    <button class="btn btn-default btn-block bookingButtons4" type="submit">Edit Property</button>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+                                    <button class="btn btn-default btn-block bookingButtons4" type="submit">Delete Property</button>
                                 </div>
                                 
                             </div>

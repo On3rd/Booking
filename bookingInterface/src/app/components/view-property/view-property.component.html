@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default" id="indexNavBar">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand" (click)="home()"> <img src="assets/img/Booking.com.png" alt="Booking.com" width="70%" id="brandImage"></a>
+            <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand"> <img src="assets/img/Booking.com.png" alt="Booking.com" height="100%" id="brandImage"></a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1" id="toggleMenu"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
   
@@ -45,32 +45,22 @@
     <!--Logged In Button-->
         <span *ngIf="1==1">
           
-                <div class="form-group">
-         
-    
-                        <li class="dropdown">
-                       <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn"  type="button" id="dropdownMenuButton" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                                 alt=""> <span>{{username}}</span> </div></a>
-                       <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                        
-                        <div class="dropdown-content">
-                       <a class="dropdown-item" (click) = " ManageBooking()">Manage Bookings</a>
-                       <br>
-                      <a class="dropdown-item" (click) = "viewProfile()">View Profile</a>
-                      <br>
-                      <a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a>
-                      <br>
-                      
-                       <div class="dropdown-divider">
-                         
-                        </div>
-                        <hr>
-                       <a class="dropdown-item" (click) = "logout()">Sign Out</a>
-                       </div>
-                      </div>
-                    
-                       </li>
-                      </div>
+  <div class="form-group">
+                   
+    <li class="nav-item dropdown">
+   <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+             alt=""> <span>{{username}}</span> </div></a>
+   <div class="dropdown-menu " aria-labelledby="dropdownThemes">
+   <ul class ="padContent">
+   <li  *ngIf ="admin == false"><a class="dropdown-item" (click) ="ManageBooking()">Manage Bookings</a></li>
+   <li><a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a></li>
+  
+  
+   <div class="dropdown-divider"><hr></div>
+   <li><a class="dropdown-item" (click) = "logout()">Sign Out</a></li>
+   </ul></div>
+   </li>
+  </div>
         </span>
   
       </div>
@@ -106,42 +96,33 @@
    <div class="row product">
         <div *ngFor="let properties of property" class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 ">
  
-        <div class="img-rounded " *ngIf = "prop_ID == properties.prop_Id">
-            
+        <div class="img-rounded " *ngIf = "searchProperty == properties.prop_name">
 
-            
             <div class="row padContent" >
   
-                <div class="col-lg-4"><a><img src="assets/img/Odyssey Lifestyle Opens in new window/5.jpg" width="100%" id="placeImage"></a>
+                <div class="col-lg-12"><a><img src="assets/img/Johannesburg.jpg" class ="img-rounded" width="100%" id="placeImage"></a>
                 </div>
-                <div class="col-lg-4"><a><img src="assets/img/Odyssey Lifestyle Opens in new window/4.jpg" width="100%" id="placeImage"></a>
-                </div>
-                <div class="col-lg-4"><a><img src="assets/img/Odyssey Lifestyle Opens in new window/8.jpg" width="100%" id="placeImage"></a>
-                </div>
-
             </div>
-               <div class="row padContent2" id ="dispDiv">
-                <div class="col-lg-12">
-                    <h3>{{properties.prop_name | titlecase}}</h3>
-                         <p><label>Property Type:</label> {{properties.prop_type | titlecase}}</p> 
-                         <p> <label>Number Of Rooms:</label> {{properties.numberRoom }} </p> 
-                         <p> <label>Street Address:</label> {{properties.streetAddress | titlecase}}</p>  
-                         <p> <label>Address Line 2:</label> {{properties.addressline2 | titlecase}}</p> 
-                         <p> <label>City:</label> {{properties.city | titlecase}}</p> 
-                         <p> <label>Provice:</label> {{properties.province | titlecase}} </p> 
-                         <p> <label>Country:</label> {{properties.country | titlecase}} </p> 
-                         <p> <label>Contact:</label> <a (click) ="viewManager(properties.user_Id)"> {{properties.contact_name | titlecase}} (for more information.)</a></p> 
+               <div class="row padContent">
+                <div class="col-lg-12"><h3>{{properties.prop_name}}</h3>
+                          <p>Property Type: {{properties.prop_type}}</p>
+                          <p>Number Of Rooms: {{properties.numberRoom}} </p>
+                          <p>Street Address: {{properties.streetAddress}} </p>
+                          <p>Address Line 2: {{properties.addressline2}} </p>
+                          <p>City: {{properties.city}} </p>
+                          <p>Provice: {{properties.province}} </p>
+                          <p>Country: {{properties.country}} </p>
+                          <p>Contact Person: {{properties.contact_name}} </p>
                          
-                         <p> <label>Price:</label> R{{properties.price }} </p> 
+                          <p>Price: R{{properties.price}} </p>
                           
                 
   
                 </div>
   
             </div>
-        
             <div class="row padContent">
-                    <div class ="col-lg-12"><form class="form-horizontal " [formGroup] = "checkInForm" method="post" id="searchForm">
+                    <div class ="col-lg-12"><form class="form-horizontal img-rounded" method="post" id="searchForm">
                         <div id="formDiv padContent">
                             <div class="row" >
                                 <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -151,16 +132,10 @@
                             <div class="row ">
                     
                                 <div class="col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0"><i class="fa fa-calendar-check-o"></i><span>Check-In:</span>
-                                    <input class="form-control" type="date" min="{{date}}" max ="2018-12-31" name="txt_checkInDate" required="" [formControl]= "checkInForm.controls.txt_checkInDate" [(ngModel)]="accBooking.checkInDate">
-                                    <span class = "validate2" *ngIf ="!checkInForm.controls.txt_checkInDate.valid">
-                                            required.
-                                       </span>
+                                    <input class="form-control" type="date" min="2018-04-30" max ="2018-12-31" name="txt_checkInDate" required="" [(ngModel)]="accBooking.checkInDate">
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><i class="fa fa-calendar-times-o"></i><span>Check-Out:</span>
-                                    <input class="form-control" type="date" min="2018-04-30" max ="2019-12-31" [formControl]= "checkInForm.controls.txt_checkOutDate" name="txt_checkOutDate" required="" [(ngModel)]="accBooking.checkOutDate">
-                                    <span class = "validate2" *ngIf ="!checkInForm.controls.txt_checkOutDate.valid">
-                                            required.
-                                       </span>
+                                    <input class="form-control" type="date" min="2018-04-30" max ="2019-12-31" name="txt_checkOutDate" required="" [(ngModel)]="accBooking.checkOutDate">
                                 </div>
                                 <br>
                                 <div class="col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0" >
@@ -172,43 +147,28 @@
                                <div class="col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-6 col-xs-offset-0">
                                     <div >
                     <span>Adults:</span>
-                                        <select class="form-control Search" name ="adults" [formControl]= "checkInForm.controls.adults" [(ngModel)] = "accBooking.noOfAdults"required="">
-                                                <option value="0">No Adult</option>
+                                        <select class="form-control Search" name ="adults" [(ngModel)] = "accBooking.noOfAdults"required="">
+                                            <optgroup label="Adults">
                                                 <option value="1">1 Adult</option>
                                                 <option value="2">2 Adults</option>
                                                 <option value="3">3 Adults</option>
                                                 <option value="4">4 Adults</option>
-                                                <option value="5">5 Adults</option>
-                                                <option value="6">6 Adults</option>
-                                                <option value="7">7 Adults</option>
-                                                <option value="8">8 Adults</option>
+                                            </optgroup>
                                         </select>
                                     </div>
-                                    <span class = "validate2" *ngIf ="!checkInForm.controls.adults.valid">
-                                            required.
-                                       </span>
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
                                     <div >
                     <span>Children:</span>
-                                        <select class="form-control Search" name ="children" [formControl]= "checkInForm.controls.children" [(ngModel)]="accBooking.noOfChildren" required="">
-                                           
-                                                    <option value="0">No Child</option>
-                                                    <option value="1">1 Child</option>
-                                                    <option value="2">2 Chlidren</option>
-                                                    <option value="3">3 Children</option>
-                                                    <option value="4">4 Children</option>
-                                                    <option value="5">5 Child</option>
-                                                    <option value="6">6 Child</option>
-                                                    <option value="7">7 Chlidren</option>
-                                                    <option value="8">8 Children</option>
-                                                    <option value="9">9 Children</option>
-                                           
+                                        <select class="form-control Search" name ="children"  [(ngModel)]="accBooking.noOfChildren" required="">
+                                            <optgroup label="Children">
+                                                <option value="1">1 Child</option>
+                                                <option value="2">2 Chlidren</option>
+                                                <option value="3">3 Children</option>
+                                                <option value="4">4 Children</option>
+                                            </optgroup>
                                         </select>
                                     </div>
-                                    <span class = "validate2" *ngIf ="!checkInForm.controls.children.valid">
-                                            required.
-                                       </span>
                                 </div>
                                 
                     </div>
@@ -229,14 +189,10 @@
                 </div>
                 <div class="row padContent">
                         <span class="col-lg-6">
-                                <button class="btn btn-default bookingButtons4" type="button"  (click)="back(properties.prop_name)">Back</button>
+                                <button class="btn btn-default bookingButtons2" type="button"  (click)="back(properties.prop_name)">Back</button>
                         </span> 
-
-                        <span class="col-lg-6" *ngIf = "payMethodStatus == false || payMethodStatus == null">
-                            <app-payment></app-payment>
-                        </span>
                         <span class="col-lg-6">
-                            <p class="text-right" *ngIf ="admin == false && payMethodStatus == true"><button class="btn btn-default bookingButtons4" [disabled] = "!checkInForm.valid" type="button" id="viewPropertyButton" (click)="reserve(accBooking.checkInDate,accBooking.checkOutDate,properties.prop_name,properties.prop_type,properties.numberRoom,properties.city,properties.contact_name,properties.addressline2,properties.country,properties.province,properties.streetAddress,properties.price,properties.postal_code)">Reserve</button>
+                            <p class="text-right" *ngIf ="admin == false"><button class="btn btn-default bookingButtons2" type="button" id="viewPropertyButton" (click)="reserve(accBooking.checkInDate,accBooking.checkOutDate,properties.prop_name,properties.prop_type,properties.numberRoom,properties.city,properties.contact_name,properties.addressline2,properties.country,properties.province,properties.streetAddress,properties.price,properties.postal_code)">Reserve</button>
                             </p>
                             </span>
                     

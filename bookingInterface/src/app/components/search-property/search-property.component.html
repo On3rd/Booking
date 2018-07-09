@@ -2,7 +2,7 @@
 <nav class="navbar navbar-default" id="indexNavBar">
   <div class="container">
       <div class="navbar-header">
-          <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand" (click)= "home()"> <img src="assets/img/Booking.com.png" alt="Booking.com" width="70%" id="brandImage"></a>
+          <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand"> <img src="assets/img/Booking.com.png" alt="Booking.com" height="100%" id="brandImage"></a>
           <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1" id="toggleMenu"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
       </div>
 
@@ -46,32 +46,22 @@
   <!--Logged In Button-->
       <span *ngIf="1==1">
         
-            <div class="form-group">
-         
-    
-                    <li class="dropdown">
-                   <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn"  type="button" id="dropdownMenuButton" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-                             alt=""> <span>{{username}}</span> </div></a>
-                   <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
-                    
-                    <div class="dropdown-content">
-                   <a class="dropdown-item" (click) = " ManageBooking()">Manage Bookings</a>
-                   <br>
-                  <a class="dropdown-item" (click) = "viewProfile()">View Profile</a>
-                  <br>
-                  <a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a>
-                  <br>
-                  
-                   <div class="dropdown-divider">
-                     
-                    </div>
-                    <hr>
-                   <a class="dropdown-item" (click) = "logout()">Sign Out</a>
-                   </div>
-                  </div>
-                
-                   </li>
-                  </div>
+<div class="form-group">
+                 
+  <li class="nav-item dropdown">
+ <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+           alt=""> <span>{{username}}</span> </div></a>
+ <div class="dropdown-menu " aria-labelledby="dropdownThemes">
+ <ul class ="padContent">
+ <li><a class="dropdown-item" (click) ="ManageBooking()">Manage Bookings</a></li>
+ <li><a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a></li>
+
+
+ <div class="dropdown-divider"><hr></div>
+ <li><a class="dropdown-item" (click) = "logout()">Sign Out</a></li>
+ </ul></div>
+ </li>
+</div>
       </span>
 
     </div>
@@ -103,34 +93,31 @@
 </nav>
 
 <div class="container ">
-    <br>
- <h3>Search Results.</h3>
+  <div class="row product ">
+          <app-search-form></app-search-form>
    
-    <hr>
-  <div class="row product padContent4">
-         
+      
 
-      <div *ngFor="let properties of property" class="col-lg-12 col-lg-offset-0 col-md-12 col-md-offset-0 col-sm-11 col-sm-offset-0 col-xs-12 col-xs-offset-0 ">
+      <div *ngFor="let properties of property" class="col-lg-7 col-lg-offset-0 col-md-7 col-md-offset-0 col-sm-11 col-sm-offset-0 col-xs-12 col-xs-offset-0 ">
           
-            <div class="row product" *ngIf ="(title == properties.city || title == properties.prop_name || title== properties.prop_type || title == properties.province || title == properties.country) && properties.numberRoom <=rooms  ">
-                    
-                      
+            <div class="row product" *ngIf ="title == properties.city || title == properties.prop_name ||title == properties.prop_type || title == properties.province || title == properties.country">
+            
               <div class="row img-rounded padContent " id ="dispDiv" >
-                    
-                
-                       <div class="col-lg-3 col-lg-offset-0 col-md-5 col-sm-5 col-xs-10 col-xs-offset-1 img-rounded">
-                          <a (click)= "viewPropertyByName(properties.prop_name,properties.prop_Id)"><div class ="padContent4"><img height = "100%" width = "100%"src="assets/img/Odyssey Lifestyle Opens in new window/1.jpg"></div></a>
-                        </div>  <div class="col-lg-7 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
-                          <a (click)= "viewPropertyByName(properties.prop_name,properties.prop_Id)"><h4>{{properties.prop_name |titlecase}}</h4></a>
-                          <span>{{properties.prop_type |titlecase}}</span><br>
-                          <span>{{properties.streetAddress |titlecase}} </span><br>
-                          <span>{{properties.addressline2 |titlecase}}, </span>
-                          <span>{{properties.city|titlecase}} </span><br>
-                         </div>
-                         <div class="col-lg-2 col-lg-offset-0 col-md-5 col-sm-5 col-xs-10 col-xs-offset-1">
-                          
-                            <p class="padContent4 fixed-bottom">
-                              <button class="btn btn-default btn-block bookingButtons5 " type="button" id="viewPropertyButton" (click)="viewPropertyByName(properties.prop_name,properties.prop_Id)">View Prices</button>
+    
+                  
+        
+                      <div class="col-lg-4 col-lg-offset-0 col-md-5 col-sm-5 col-xs-10 col-xs-offset-1 img-rounded">
+                          <a (click)= "viewPropertyByName(properties.prop_name)"> {{properties.image}}</a>
+                        </div>
+                      <div class="col-lg-8 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-6 col-sm-offset-0 col-xs-10 col-xs-offset-1">
+                          <a (click)= "viewPropertyByName(properties.prop_name)"><h4>{{properties.prop_name}}</h4></a>
+                          <span>{{properties.prop_type}}</span><br>
+                          <span>{{properties.streetAddress}} </span><br>
+                          <span>{{properties.addressline2}}, </span>
+                          <span>{{properties.city}} </span><br>
+                         
+                          <p class="text-right">
+                              <button class="btn btn-default bookingButtons2 " type="button" id="viewPropertyButton" (click)="viewPropertyByName(properties.prop_name)">View Prices</button>
                           </p>
 
                       </div>

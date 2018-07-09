@@ -17,26 +17,9 @@ export class PropertyMapService {
   private city:string;
   private title:string;
   private propId:number;
-  private rooms:number = 0;
-  private counter = 0;
+
   constructor(private _http:Http) { }
 
-  setCounter(n)
-  {
-    this.counter = n;
-  }
-  getCounter()
-  {
-    return this.counter;
-  }
-  setRooms(rooms:number)
-  {
-    this.rooms = rooms;
-  }
-  getRooms()
-  {
-    return this.rooms;
-  }
   setTitle(title:string)
   {
     this.title = title;

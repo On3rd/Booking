@@ -29,12 +29,5 @@ export class HomeComponent implements OnInit {
   {
     this._login.logOut();
   }
-  viewProfile()
-  {
-    this._router.navigate(['viewProfile']);
-  }
-  home()
-  {
-    this._router.navigate(['home']);
-  }
+
 }

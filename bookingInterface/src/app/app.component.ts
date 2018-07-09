@@ -1,8 +1,7 @@
-import { Component ,ViewContainerRef } from '@angular/core';
+import { Component } from '@angular/core';
 import {LoginService} from './services/login.service';
-import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
+import {FormGroup,FormControl,Validators} from '@angular/forms';
 
-   
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,13 +9,8 @@ import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
 export class AppComponent {
   title = 'app';
 
-  form;
-  
-
   ngOnInit()
   { 
-    
-
     var username= JSON.parse(localStorage.getItem('currentUser'))
     var admin = JSON.parse(localStorage.getItem('Admin'))
     if (username == null )
