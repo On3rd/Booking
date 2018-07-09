@@ -1,0 +1,17 @@
+
+<div class ="row">
+    <br>
+    
+<div *ngFor="let timesheet of timeSheets; let i = index">
+    <div *ngIf="prodId != timesheet.prop_Id && timesheet != null && i == 0"> <p align="center">The Property Is Not Available</p></div>
+ 
+     <div *ngIf="prodId == timesheet.prop_Id" class="col-lg-4 col-lg-offset-1">
+    
+          <p align = "center" class ="btn btn-sm btn-block bookingButtons5" >{{timesheet.availableDates | date : "fullDate"}}</p>
+      
+       
+    </div>
+    
+   </div>
+  </div>
+
