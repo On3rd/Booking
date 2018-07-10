@@ -8,14 +8,14 @@
         <div class="row ">
 
             <div class="col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0"><i class="fa fa-calendar-check-o"></i><span>Check-In:</span>
-                <input class="form-control" type="date" min="2018-04-30" max ="2018-12-31" name="txt_checkInDate" required="" [(ngModel)] ="checkIn">
+                <input class="form-control" type="date" min="{{date}}" max ="2018-12-31" name="txt_checkInDate" required="" [(ngModel)] ="checkIn">
             </div>
             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><i class="fa fa-calendar-times-o"></i><span>Check-Out:</span>
                 <input class="form-control" type="date" min="2018-04-30" max ="2019-12-31" name="txt_checkOutDate" required="" [(ngModel)] = "checkOut">
             </div>
             <br>
             <div class="col-lg-4 col-lg-offset-0 col-md-4 col-md-offset-0 col-sm-4 col-sm-offset-0 col-xs-4 col-xs-offset-0" >
-                <button class="btn btn-primary btn-block bookingButtons" type="button" id="searchButton" (click) = "checkAvailability(checkIn,checkOut)">Check Availability</button>
+                <button class="btn btn-primary btn-block bookingButtons" type="button" id="searchButton" (click) = "checkAvailability(checkIn,checkOut)">Check Availability <span class="glyphicon glyphicon-calendar"></span></button>
             </div>
         </div>
 <br>

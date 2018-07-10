@@ -8,6 +8,7 @@ import { forEach } from '@angular/router/src/utils/collection';
 import {LoginService} from '../../services/login.service';
 import { CookieService } from 'angular2-cookie/core';
 import {LocalStorageService,SessionStorageService} from 'ngx-webstorage';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-display',
@@ -19,12 +20,15 @@ export class EditDisplayComponent implements OnInit {
   private dispProperty: DispProperty;
   username:string;
   private admin:any;
-  constructor(private _login:LoginService,private _displayPropertiesService: DisplayPropertiesServiceService,private _router:Router) { }
+  
+
+  constructor(public toastr:ToastrService,private _login:LoginService,private _displayPropertiesService: DisplayPropertiesServiceService,private _router:Router) { }
 
   ngOnInit() {
     this.dispProperty = this._displayPropertiesService.getter()
     this.username = this._login.getLoggedInUser();
     this.admin = this._login.getAdmin();
+
   
   }
   logout()
@@ -44,6 +48,12 @@ export class EditDisplayComponent implements OnInit {
   {
     this._router.navigate(['editProfile']);
   }
+
+  viewProfile()
+  {
+    this._router.navigate(['viewProfile']);
+  }
+  
   processForm(
     city: string,
     country: string,
@@ -54,7 +64,7 @@ export class EditDisplayComponent implements OnInit {
     if (city == null || country == null ||
       image == null||province==null  ) {
       console.log("Enter Values");
-      
+      this.toastr.error("Make sure your enter all the required inputs","Invalid Inputs");
       // alert("Make sure you entered all the needed fields");
     } else {
       if (this.dispProperty.disp_Id == undefined) {

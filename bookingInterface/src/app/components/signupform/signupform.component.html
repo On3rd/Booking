@@ -1,5 +1,5 @@
 <div class="form-group">
-    <button type="button" class="btn btn-sm btn-primary navbar-btn bookingButtons" data-toggle="modal" data-target="#singupform">Register </button>
+    <button type="button" class="btn btn-sm btn-primary navbar-btn bookingButtons" data-toggle="modal" data-target="#singupform">Register <span class="glyphicon glyphicon-cloud-upload"></span> </button>
        </div>
        
  
@@ -27,20 +27,36 @@
     
               <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                   alt="">
-              <form class="form-signin" method = "POST">
-                  
-              <input type="text" class="form-control " name ="name" size='38%' placeholder="First Name" [(ngModel)]="user.name"  required >
-              
-
-                    <input type="text" class="form-control " name ="surname" size='38%' placeholder="Last Name" [(ngModel)]="user.surname" required #name = "ngModel" >
-                    <div> touched : {{name.touched}}
-                        </div>
-                <input type="text" class="form-control " name = "email" size='38%' placeholder="Email" [(ngModel)]="user.email" required >
-                 <input type="text" class="form-control " name = "phonenumber" size='38%' placeholder="Phone Number" [(ngModel)]="user.phoneNo" required >
-               <input type="password" class="form-control" name = "pword" placeholder="Password" size='38%' [(ngModel)]="user.password" required>
+              <form class="form-signin" [formGroup] = "signUpForm">
+                
+                    <span class = "validate" *ngIf ="!signUpForm.controls.name.valid">
+                            Name required.
+                       </span>
+         
+              <input type="text" class="form-control" name ="name" size='35%' placeholder="First Name" [formControl]= "signUpForm.controls.name" [(ngModel)]="user.name" >
+              <span class = "validate" *ngIf ="!signUpForm.controls.surname.valid">
+                    Surname required.
+                </span> 
+    
+             <input type="text" class="form-control" name ="surname" size='35%' placeholder="Last Name"  [formControl] = "signUpForm.controls.surname" [(ngModel)]="user.surname" >
+             <span class = "validate" *ngIf ="!signUpForm.controls.email.valid">
+                    Email required.
+                         </span>
+         
+                 <input type="text" class="form-control " name = "email" size='35%' placeholder="Email (e.g abcd@gmail.com)" [formControl] = "signUpForm.controls.email" [(ngModel)]="user.email"  >
+           
+                 <span class = "validate" *ngIf ="!signUpForm.controls.phonenumber.valid">
+                        Phone number required.
+                        </span>
+                <input type="text" class="form-control " name = "phonenumber" size='35%' placeholder="Phone Number (e.g 0123456789)" [formControl]= "signUpForm.controls.phonenumber" [(ngModel)]="user.phoneNo" >
+                
+                <span class = "validate" *ngIf ="!signUpForm.controls.pword.valid">
+                        Password required.
+                        </span>
+                <input type="password" class="form-control" name = "pword" placeholder="Password (e.g Abcd#1234)" size='35%' [formControl] = "signUpForm.controls.pword" [(ngModel)]="user.password" >
             
-                <button class="btn btn-default btn-block bookingButtons4" data-dismiss="modal" type="submit" (click) ="processForm(user.name,user.surname,user.email,user.phoneNo,user.password)">
-                  Sign up</button>
+                <button class="btn btn-default btn-block bookingButtons4" [disabled] = "!signUpForm.valid"data-dismiss="modal" type="submit" (click) ="processForm(user.name,user.surname,user.email,user.phoneNo,user.password)">
+                  Sign up <span class="glyphicon glyphicon-cloud-upload"></span></button>
               <a class="text-center new-account" data-dismiss="modal" data-toggle="modal" data-target="#singinform">Already have an account?</a>
             
            </form>

@@ -12,7 +12,7 @@ export class ManagePropertyComponent implements OnInit {
 
   private userID;
   private properties:Property[];
-  private statement ;
+  private statement =false ;
  
   constructor(private _router:Router, private _propertyService:PropertyService,private _login:LoginService) {
    
@@ -22,20 +22,43 @@ export class ManagePropertyComponent implements OnInit {
   ngOnInit() {
 
     this.userID = this._login.getLoggedInUserID();
-    this.statement = false;
+    
     
   
   this._propertyService.getProperties().subscribe((property)=>
   {
     this.properties = property;
+  });
    
-  })
-
   }
   
   managePropertyPage()
   {
     this._router.navigate(['/manageProperty']);
+  }
+
+  getStatement()
+  {
+    if(this.properties != undefined)
+    {
+      var state;
+      var UID = this.userID;
+
+      this.properties.forEach(function(value)
+    {
+        if(UID == value.user_Id)
+        {
+          state = true;
+        }
+      });
+        return this.statement = state;
+     
+    }
+    else
+    {
+     
+      return this.statement = false;
+    }
   }
 
 }

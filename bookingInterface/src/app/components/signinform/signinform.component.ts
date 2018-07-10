@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,ViewContainerRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {User} from '../../classes/user';
@@ -6,6 +6,8 @@ import { forEach } from '@angular/router/src/utils/collection';
 import {LoginService} from '../../services/login.service';
 import { CookieService } from 'angular2-cookie/core';
 import {LocalStorageService,SessionStorageService} from 'ngx-webstorage';
+import { ToasterService } from '../../services/toaster.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signinform',
   templateUrl: './signinform.component.html',
@@ -13,15 +15,15 @@ import {LocalStorageService,SessionStorageService} from 'ngx-webstorage';
 })
 export class SigninformComponent implements OnInit {
   private user:User[];
-  
-  constructor(private _userService:UserService, private _router:Router,private _login:LoginService,private _cookieService: CookieService,private _localStorage:LocalStorageService,private _sessionStorage:SessionStorageService) {
+ 
+  constructor(public toastr:ToastrService,private _userService:UserService, private _router:Router,private _login:LoginService,private _cookieService: CookieService,private _localStorage:LocalStorageService,private _sessionStorage:SessionStorageService) {
 
    }
 
   ngOnInit() {
     this._userService.getUsers().subscribe((users)=>{console.log(users);
       this.user = users;
-    })
+    });
   }
     login(email:string,password:string)
     {
@@ -39,7 +41,7 @@ export class SigninformComponent implements OnInit {
         uname = value.name;
         usurname = value.surname;
        phoneNo = value.phoneNo;
-
+        
         console.log("Welcome!");
         counter++;
           console.log(user_id,email, password , counter,phoneNo);
@@ -49,21 +51,27 @@ export class SigninformComponent implements OnInit {
    
        if(counter>=1)
        {
-         var key = btoa(email) + '??' +btoa(password);
+        
+        var key = btoa(email) + '??' +btoa(password);
         //this._cookieService.put('sessionID',key);
         //this._localStorage.store('currentUser',JSON.stringify({name:uname,surname:usurname,email:email,phoneNumber:phoneNo}));
         this._login.setLogin(user_id,uname,usurname,email,phoneNo);
         this._userService.setUserLoggedIn();
         this._router.navigate(['/home']);
         console.log(this._login.getLoggedInUser());
+       
         counter =0;
        } else
        {
-       alert("Incorrect inputs");
+       //alert("Incorrect inputs");
+       this.toastr.info("Incorrect inputs","Search");
+         
        }
       }else
       {
-        alert("Data Not Available... Make Sure You Registered Before Loggin In");
+       // alert("Data Not Available... Make Sure You Registered Before Loggin In");
+        this.toastr.error("Data Not Available... Make Sure You Registered Before Loggin In","Error");
+      
       }
     
     }

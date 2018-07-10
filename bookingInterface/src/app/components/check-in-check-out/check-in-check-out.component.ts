@@ -10,11 +10,10 @@ import { PropertyMapService } from '../../services/property-map.service';
   styleUrls: ['./check-in-check-out.component.css']
 })
 export class CheckInCheckOutComponent implements OnInit {
-
-  private userID;
+   private userID;
   private propID;
   private timeSlots:PropertyTimeSheet[];
-  
+  private date;
   constructor(private _propertyTimeSheetService:PropertyTimeSheetService,private _login:LoginService,private _propertyMapService:PropertyMapService) {
     
    }
@@ -28,8 +27,15 @@ export class CheckInCheckOutComponent implements OnInit {
     this.timeSlots = timeslots;
     console.log("Timeslots ",this.timeSlots);
   })
+
+    this.date = this.currentDate();
   }
 
+   currentDate()
+   {
+     var date = new Date();
+     return date.getFullYear() +'/'+ date.getMonth() + '/' + date.getDay() ;
+   }
   checkAvailability(checkIn:Date,checkOut:Date)
   {
 

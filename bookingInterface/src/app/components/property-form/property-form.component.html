@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default" id="indexNavBar">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand"> <img src="assets/img/Booking.com.png" alt="Booking.com" height="100%" id="brandImage"></a>
+            <a class="navbar-brand navbar-link bookingButtons"  id="bookingBrand" (click) ="home()"> <img src="assets/img/Booking.com.png" alt="Booking.com" width="70%" id="brandImage"></a>
             <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1" id="toggleMenu"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
         </div>
   
@@ -35,22 +35,32 @@
     <!--Logged In Button-->
         <span *ngIf="1==1">
           
-  <div class="form-group">
-                   
-    <li class="nav-item dropdown">
-   <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
-             alt=""> <span>{{username}}</span> </div></a>
-   <div class="dropdown-menu " aria-labelledby="dropdownThemes">
-   <ul class ="padContent">
-   <li><a class="dropdown-item" (click) ="ManageBooking()">Manage Bookings</a></li>
-   <li><a class="dropdown-item" (click) = "EditProfile()">Edit Profile</a></li>
-  
-  
-   <div class="dropdown-divider"><hr></div>
-   <li><a class="dropdown-item" (click) = "logout()">Sign Out</a></li>
-   </ul></div>
-   </li>
-  </div>
+                <div class="form-group">
+         
+    
+                        <li class="dropdown">
+                       <a class="nav-link dropdown-toggle transButton2 bookingButtons3 btn btn-primary navbar-btn"  type="button" id="dropdownMenuButton" href="#" id="dropdownThemes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <div align ="left" ><img   class="profile-img2" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                                 alt=""> <span>{{username}}</span> </div></a>
+                       <div class="dropdown-menu " aria-labelledby="dropdownMenuButton">
+                        
+                        <div class="dropdown-content">
+                       <a class="dropdown-item" (click) = " ManageBooking()">Manage Bookings <span class="glyphicon glyphicon-calendar"></span></a>
+                       <br>
+                      <a class="dropdown-item" (click) = "viewProfile()">View Profile <span class="glyphicon glyphicon-folder-open"></span></a>
+                      <br>
+                      <a class="dropdown-item" (click) = "EditProfile()">Edit Profile <i class="fa fa-pencil-square-o"></i></a>
+                      <br>
+                      
+                       <div class="dropdown-divider">
+                         
+                        </div>
+                        <hr>
+                       <a class="dropdown-item" (click) = "logout()">Sign Out <i class="fa fa-sign-out"></i></a>
+                       </div>
+                      </div>
+                    
+                       </li>
+                      </div>
         </span>
   
       </div>
@@ -233,7 +243,7 @@
         <br>
                     <div class="row ">
                         <div class="col-lg-3 col-md-3 padContent">
-                            <button class="btn btn-default btn-block bookingButtons" type="submit">Add Property</button>
+                            <button class="btn btn-default btn-block bookingButtons" type="submit">Add Property </button>
                         </div>
                     </div>
                 </div>

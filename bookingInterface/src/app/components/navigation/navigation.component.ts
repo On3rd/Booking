@@ -32,5 +32,17 @@ export class NavigationComponent implements OnInit {
     {
       this._router.navigate(['/home']);
     }
+    viewProfile()
+    {
+      this._router.navigate(['viewProfile']);
+    }
+    EditProfile()
+    {
+      this._router.navigate(['editProfile']);
+    }
+    ManageBooking()
+    {
+      this._router.navigate(['manageBooking']);
+    }
     
 }

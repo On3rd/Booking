@@ -5,6 +5,7 @@ import {LoginService} from '../../services/login.service';
 import {LoggedUserComponent} from '../../components/logged-user/logged-user.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../../classes/user';
+import { ToastrService } from 'ngx-toastr';
 //import {LoggedInDetails} from '../../logged-in-details';
 
 
@@ -16,7 +17,7 @@ import { User } from '../../classes/user';
 export class AdminSignInFormComponent implements OnInit {
   private user:User[];
 
-  constructor(private _userService:UserService, private _router:Router,private _login:LoginService) { }
+  constructor(public toastr: ToastrService,private _userService:UserService, private _router:Router,private _login:LoginService) { }
 
   ngOnInit() {
     this._userService.getUsers().subscribe((users)=>{console.log(users);
@@ -63,12 +64,13 @@ export class AdminSignInFormComponent implements OnInit {
         
         this._login.setAdmin(admin_id,uname,usurname,email,phoneNo,stuff_no);
         this._router.navigate(['/editDisplay']);
-
+        this.toastr.success("Login Successful.","Success");
         console.log(this._login.getLoggedInUser());
         counter = 0;
        } else
        {
-       alert("Incorrect inputs");
+      // alert("Incorrect inputs");
+       this.toastr.error("Incorrect Inputs","Invalid Inputs");
        }
      
     

@@ -12,6 +12,7 @@ import {PropertyMaps} from '../../classes/property-maps';
 import {DisplayPropertiesServiceService} from '../../services/display-properties-service.service';
 import { LocalStorage } from 'ngx-webstorage';
 import { PropertyTimeSheetService } from '../../services/property-time-sheet.service';
+import { SearchUserService } from '../../services/search-user.service';
 @Component({
   selector: 'app-display-properties',
   templateUrl: './display-properties.component.html',
@@ -26,7 +27,7 @@ export class DisplayPropertiesComponent implements OnInit {
   private username:string;
   private admin:any;
 
-  constructor(private _login:LoginService,private _PropertyService:PropertyService, private _router:Router,private _propertyMapService:PropertyMapService ,private _displayPropertiesService:DisplayPropertiesServiceService,private _PropertyTimeSheet:PropertyTimeSheetService) {
+  constructor(private _searchUserService:SearchUserService,private _login:LoginService,private _PropertyService:PropertyService, private _router:Router,private _propertyMapService:PropertyMapService ,private _displayPropertiesService:DisplayPropertiesServiceService,private _PropertyTimeSheet:PropertyTimeSheetService) {
     this.city = this._propertyMapService.getCity();
   }
 
@@ -52,16 +53,22 @@ export class DisplayPropertiesComponent implements OnInit {
   viewPropertyByName(prop_name:string,prodID:number)
   {
    this._PropertyTimeSheet.setDisplayPropertyId(prodID,prop_name);
-
+    this._searchUserService.setSearchId(prodID);
     this._propertyMapService.setPropName(prop_name);
     this.propertyName = this._propertyMapService.getPropName();
     console.log(this.propertyName);
     this._router.navigate(['viewProperty']);
   }
+  
+  viewProfile()
+  {
+    this._router.navigate(['viewProfile']);
+  }
   home()
   {
     this._router.navigate(['home']);
   } 
+
   ManageBooking()
   {
     this._router.navigate(['manageBooking']);

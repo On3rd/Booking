@@ -27,7 +27,7 @@ export class HomeViewComponent implements OnInit {
   private city2:String;
   private price:number;
   private averagePrice:number;
-  private numberOfProperies:number;
+  private numberOfProperies:number =0;
 
   constructor(private _PropertyService:PropertyService, private _router:Router,private _propertyMapService:PropertyMapService ,private _displayPropertiesService:DisplayPropertiesServiceService) {
 

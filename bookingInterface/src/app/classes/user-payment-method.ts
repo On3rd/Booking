@@ -1,10 +1,10 @@
 export class UserPaymentMethod {
     
-    private userPaymentMethod_Id:number
-	private user_Id:number
-	private card_type:string
-	private card_number:string
-	private expiry_date:string
-	private security_code:string
+    userPaymentMethod_Id:number
+	user_Id:number
+	card_type:string
+	card_number:string
+	expiry_date:Date
+	security_code:string
 	
 }

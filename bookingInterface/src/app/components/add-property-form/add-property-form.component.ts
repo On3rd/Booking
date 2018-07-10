@@ -5,6 +5,8 @@ import { Property } from '../../classes/property';
 import { LoginService } from '../../services/login.service';
 import {User} from '../../classes/user';
 import { UserService } from '../../services/user.service';
+import {FormGroup,FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-property-form',
@@ -18,8 +20,9 @@ export class AddPropertyFormComponent implements OnInit {
   private user:User;
   private userID:number;
   private users:User[];
-
-  constructor(private _userService:UserService,private _login:LoginService,private _propertyService: PropertyService, private _router: Router) { }
+  addProperty:FormGroup;
+  
+  constructor(public toastr: ToastrService,public _formBuilder:FormBuilder,private _userService:UserService,private _login:LoginService,private _propertyService: PropertyService, private _router: Router) { }
 
 
   ngOnInit() {
@@ -47,8 +50,28 @@ export class AddPropertyFormComponent implements OnInit {
       this.userID = this._login.getLoggedInUserID();
       console.log("Add proper owner" + this.userID); 
     }
-   
+
+    this.addProperty = this._formBuilder.group({
+      "prop_name":new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "prop_type":new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "numberRoom" : new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "city" :new FormControl('',[Validators.maxLength(150),Validators.required])
+      ,"contact_name" :new FormControl('',[Validators.required]),
+      "addressline2":new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "country":new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "image" : new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "province" :new FormControl('',[Validators.maxLength(150),Validators.required])
+      ,"streetAddress" :new FormControl('',[Validators.required])
+      ,"website" :new FormControl(''),
+      "price":new FormControl('',[Validators.maxLength(150),Validators.required]),
+      "postal_code":new FormControl('',[Validators.maxLength(150),Validators.required])
     
+    
+    
+    
+    });
+
+
 }
 
   processForm( prop_name: string,
@@ -82,15 +105,19 @@ export class AddPropertyFormComponent implements OnInit {
       contact_name == null || addressline2 == null || country == null ||
       image == null||province==null||streetAddress==null||
       price==null||postal_code==null) {
-      alert("Invalid, Enter Values");
-      
+      //alert("Invalid, Enter Values");
+      this.toastr.error("Make sure your entered all the required values","Invalid Inputs")
       // alert("Make sure you entered all the needed fields");
     } else {
       if (this.property.prop_Id == undefined) {
         this._propertyService.createProperty(this.property).subscribe((property) => {
           console.log(property);
+          
           this._router.navigate(['/manageProperty']);
-          alert("Property Registered Successfully");
+          this.toastr.success("Property Registered Successful.","Success");
+     
+         // alert("Property Registered Successfully");
+         
         },
           (error) => {
             console.log(error);

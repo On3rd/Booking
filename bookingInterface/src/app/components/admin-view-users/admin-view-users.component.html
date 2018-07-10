@@ -29,7 +29,7 @@
             {{users.user_Id}}
           </div>
           <div class ="col-lg-2 header">
-              {{users.name}} 
+             <a (click) ="viewUser(users.user_Id)">{{users.name}}</a>  
             </div>
             <div class ="col-lg-2 header">
                 {{users.surname}}
