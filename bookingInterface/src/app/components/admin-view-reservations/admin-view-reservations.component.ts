@@ -6,6 +6,8 @@ import { Property } from '../../classes/property';
 import { AccBooking } from '../../classes/acc-booking';
 import { User } from '../../classes/user';
 import { LoginService } from '../../services/login.service';
+import { SearchUserService } from '../../services/search-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-view-reservations',
@@ -19,7 +21,7 @@ export class AdminViewReservationsComponent implements OnInit {
   private user:User[];
   private userID;
 
-  constructor(private _PropertyService:PropertyService,private _accBooking:AccBookingService,private _userService:UserService,private _login:LoginService) { }
+  constructor(private _router:Router,private _searchUserService:SearchUserService,private _PropertyService:PropertyService,private _accBooking:AccBookingService,private _userService:UserService,private _login:LoginService) { }
 
   ngOnInit() {
     this._PropertyService.getProperties().subscribe((property)=>{console.log(property);
@@ -41,7 +43,16 @@ export class AdminViewReservationsComponent implements OnInit {
     })
     this.userID = this._login.getLoggedInUserID();
   }
-
+  viewUser(user_Id)
+  {
+    this._searchUserService.setSearchId(user_Id);
+    this._router.navigate(['searchUser']);
+  }
   
+  viewProperty(id:number)
+ {
+  this._searchUserService.setSearchId(id);
+  this._router.navigate(['viewProperty']);
+ }
 
 }

@@ -64,7 +64,7 @@ export class SigninformComponent implements OnInit {
        } else
        {
        //alert("Incorrect inputs");
-       this.toastr.info("Incorrect inputs","Search");
+       this.toastr.error("Incorrect inputs","Error");
          
        }
       }else

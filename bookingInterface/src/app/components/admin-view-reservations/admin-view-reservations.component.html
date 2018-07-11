@@ -28,7 +28,7 @@
         <div class ="col-lg-2 header"> 
           <div *ngFor = "let users of user">
               <div *ngIf = "bookings.user_id == users.user_Id">
-                  {{users.name}} {{users.surname}}
+                <a (click) ="viewUser(users.user_Id)">{{users.name}} {{users.surname}}</a>
               </div>
           </div>
           </div>
@@ -37,14 +37,14 @@
                   <div *ngIf = "bookings.prop_Id == property.prop_Id">
                       <div *ngFor = "let users of user">
                           <div *ngIf ="property.user_Id == users.user_Id">
-                            {{users.name}} {{users.surname}}
+                            <a (click) ="viewUser(users.user_Id)">{{users.name}} {{users.surname}}</a>
                           </div>
                       </div>
                </div>
                </div>    
             </div>
             <div class ="col-lg-2 header">
-                {{bookings.prop_name}}
+                <a (click) ="viewProperty(bookings.prop_Id)"> {{bookings.prop_name}}</a>
               </div>
               <div class ="col-lg-2 header"> 
                   {{bookings.nights}} Nights
